@@ -1,4 +1,4 @@
-# Check a local repo for later versions of python package dependencies
+# Check a local repo for versions of python package dependencies
 
 ## Setup
 

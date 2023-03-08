@@ -1,3 +1,6 @@
 click
 requests
 colorama
+tomli
+requirements-parser
+python-dotenv
