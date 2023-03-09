@@ -13,7 +13,7 @@ load_dotenv()
 @click.command()
 @click.option(
     "--directory-name",
-    prompt="The folder name of the repo",
+    prompt="The directory name of the repo",
     help="Repo folder name",
 )
 @click.option(
@@ -35,7 +35,25 @@ load_dotenv()
     prompt="Sites directory",
 )
 def check(directory_name, dependency_file, limit_packages, sites_directory):
-    """Check a repo for a wagtail dependencies"""
+    """
+    Check a local repo for package dependencies and possible updates
+
+    Parses a dependency file and checks the current version against the latest version on pypi.org
+    and outputs a report of the results.
+
+    The dependency file can be either a requirements.txt or a pyproject.toml file.
+
+    Options:
+    =================
+
+    limit-packages: option is a comma separated list of package names to check.
+
+    sites-directory: option is the directory where the repos are stored.
+
+    directory-name: option is the name of the folder where the repo is stored.
+
+    dependency-file: option is the name of the dependency file.
+    """
     if not directory_name or not dependency_file or not sites_directory:
         click.echo(
             click.style("Missing required arguments", fg="bright_red"),

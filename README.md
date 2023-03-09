@@ -1,24 +1,31 @@
-# Check a local repo for versions of python package dependencies
+# Check a local repo for used python packages
+
+Parses a dependency file and checks the current defined version against the latest version on pypi.org and outputs a report of the results.
+    
+The dependency file can be either a `requirements.txt` or a `pyproject.toml` file.
 
 ## Setup
 
-1. Clone this repo
-2. Create a virtual environment
-3. Install the package requirements
+Clone this repo
+
+```bash
+git clone git@github.com:nickmoreton/check-packages.git
+```
+
+Make a copy of the .env.example file and update the values.
+
+```
+cp .env.example .env
+```
+
+Create a virtual environment and install the package requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Copy the example settings file
 
-```
-cp example.settings.py settings.py
-```
-
-I settings.py update `BASE_SITES_DIR` and `DEPENDENCIES`
-
-## Run the tool
+## Running the tool
 
 ```bash
 python check.py
@@ -26,10 +33,15 @@ python check.py
 
 and follow the on screen instructions.
 
-Your should see a colorised report of the dependencies current version and the latest version from pypi.
+Options: *You can add default values for some of the options in the .env file*
+- `directory-name` -  is the name of the folder where the repo is stored.
+- `dependency-file` -  is the name of the dependency file.
+- `sites-directory` -  is the parent directory where the repos are stored.
+- `limit-packages` -  is a comma separated list of package names to check (starts with comparison).
 
-## Known strange behavior
+You should see a report of the dependencies current version and the latest version available from pypi.
 
-Git dependencies will show a warning
-
-Dependencies with extra will show a warning
+The report has colour:
+- Green: the package is defined to use the latest version available
+- Yellow: the package is defined to use a version which is not the latest version available
+- Red: the package is using a repo import rather than a PyPI package
